@@ -1,0 +1,38 @@
+/* Minification failed. Returning unminified contents.
+(1,1): run-time error CSS1019: Unexpected token, found '('
+(1,11): run-time error CSS1031: Expected selector, found '('
+(1,11): run-time error CSS1025: Expected comma or open brace, found '('
+(30,2): run-time error CSS1019: Unexpected token, found ')'
+(30,3): run-time error CSS1019: Unexpected token, found '('
+(30,4): run-time error CSS1019: Unexpected token, found ')'
+ */
+(function () {
+    var apply = function (selector, callback) {
+        var list = document.querySelectorAll(selector);
+        for (var i = 0; i < list.length; i++) {
+            callback(list[i]);
+        }
+    };
+    /*toggle data-toggle class in data-target*/
+    var toggle = function () {
+        var dataTarget = this.getAttribute("data-target");
+        var dataToggle = this.getAttribute("data-toggle");
+        apply(
+			dataTarget,
+			function (element) {
+			    element.classList.toggle(dataToggle);
+			}
+		);
+    };
+    /*add click handler to navbar-toggle class*/
+    var init = function () {
+        apply(
+			".navbar-toggle",
+			function (element) {
+			    element.addEventListener("click", toggle);
+			}
+		);
+    };
+
+    init();
+})();
